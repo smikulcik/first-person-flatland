@@ -15,7 +15,13 @@ Ok, so here is an overview of the game:
 	
 ![Screenshot from Game](docs/images/screenshot.png)
 
-This is a project for my Honors class, Stories and Structures, at Eastern Kentucky University, Spring2014.
+This is a project for my Honors class, Stories and Structures, at Eastern Kentucky University, Spring 2014.
+
+## Project Documents
+
+Paper: [https://github.com/smikulcik/first-person-flatland/blob/v1.0.0/docs/Simon_Mikulcik_Flatland_Visualization.docx?raw=true](https://github.com/smikulcik/first-person-flatland/blob/v1.0.0/docs/Simon_Mikulcik_Flatland_Visualization.docx?raw=true)
+
+Presentation: [https://github.com/smikulcik/first-person-flatland/blob/v1.0.0/docs/Visualizing%20Flatland.pptx](https://github.com/smikulcik/first-person-flatland/blob/v1.0.0/docs/Visualizing%20Flatland.pptx)
 
 ## Build
 
