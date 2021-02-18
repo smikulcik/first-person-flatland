@@ -346,6 +346,7 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		
 		g.setColor(Color.black);
 		graphics.drawString("fps: "+fps,20,30);
+		graphics.drawString("Press \"p\" for debug",20,50);
 		fpsCounter++;
 	}
 
@@ -397,7 +398,8 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 	 */
 	@Override
 	public void keyReleased(KeyEvent event) {
-		switch(event.getKeyCode())
+		int e = event.getKeyCode();
+		switch(e)
 		{
 		case 38://up
 		case 87://w
@@ -414,6 +416,9 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		case 39://right
 		case 68://d
 			horizV -= 2;
+			break;
+		case 80://p
+			this.showDebug = !this.showDebug;
 		}
 		
 		Vector v = new Vector(forwardV, horizV);
