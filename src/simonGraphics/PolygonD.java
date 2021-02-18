@@ -11,13 +11,15 @@ import java.awt.geom.Line2D;
 /**
  * Polygon with double precision
  * 
+ * NOTE: Uses algorithm from blackpawn, see isInTriangle()
+ * 
  * @author Simon Mikulcik
  * date: 4/27/2014
  *
  */
 public class PolygonD implements Drawable {
     public ArrayList<PointD> verts = new ArrayList<PointD>();
-    private Color c = Color.black;
+    private Color c = new Color(230,230,230);
 
     public void setColor(Color c){this.c = c;}
     public Color getColor(){return c;}
@@ -101,8 +103,11 @@ public class PolygonD implements Drawable {
     /**
      * Checks to see if point p is in triangle ABC
      * 
-     * most of this implementation is directly from blackpawn
-     * http://www.blackpawn.com/texts/pointinpoly/default.html
+     * most of this implementation is from blackpawn, I translated it to java
+     * 
+     * Author: blackpawn
+     * Site: http://www.blackpawn.com/texts/pointinpoly/default.html
+     * Accessed: 27 April 2014
      * 
      * @param p point to check if inside triangle
      * @param A vert 1 of triangle

@@ -27,11 +27,11 @@ public class Woman extends Person {
 	}
 	
 	public void updatePhysics() {
+		//women waggle back and forth in Flatland
 		this.rotate(this.getAngularVelocity());
 		this.translate(this.getVelocity());
 		
 		this.angularVelocity = 2*Math.sin(System.nanoTime()/100000000.);
-		//System.out.println(System.nanoTime()/1000000000/(2*Math.PI));
 	}
 
 }

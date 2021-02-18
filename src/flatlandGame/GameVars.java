@@ -1,6 +1,7 @@
 package flatlandGame;
 import java.util.ArrayList;
 
+import flatlandCharacters.Avatar;
 import flatlandCharacters.Person;
 
 /**
@@ -11,7 +12,13 @@ import flatlandCharacters.Person;
  *
  */
 public class GameVars {
+	public static boolean isRunning = true;//keeps game loop running
+	
+	//vars for the plotline
 	public static boolean hasFoundSonYet = false;
 	public static boolean hasWifeGivenMission = false;
-	public static ArrayList<Person> people;
+	
+	//reference to people in scene
+	public static ArrayList<Person> people;//people who are not aSquare
+	public static Avatar aSquare;
 }

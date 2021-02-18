@@ -1,6 +1,7 @@
 package flatlandCharacters;
-import flatlandGame.GameVars;
 import simonGraphics.PointD;
+import simonGraphics.Vector;
+import flatlandGame.GameVars;
 
 /**
  * Grandson of a Square -- a hexagon
@@ -14,6 +15,8 @@ public class Grandson extends Man {
 
 	public Grandson(String name, PointD center) {
 		super("Grandson", 6, center, 50);
+		this.velocity = new Vector(10,0);
+		this.angularVelocity = 1.0;
 	}
 	
 	/**

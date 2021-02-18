@@ -13,6 +13,7 @@ public class Son extends Man {
 
 	public Son(String name, PointD center) {
 		super(name, 5, center, 50);
+		this.angularVelocity = 1;
 		
 	}
 

@@ -22,6 +22,8 @@ public class Msg {
 	@Override
 	public String toString()
 	{
+		if(from == null)
+			return msg;
 		return from.name + ": " + msg;
 	}
 }

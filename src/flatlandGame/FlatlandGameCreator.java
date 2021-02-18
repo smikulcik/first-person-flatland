@@ -24,11 +24,12 @@ import simonGraphics.Drawable;
 import simonGraphics.PointD;
 import simonGraphics.PolygonD;
 import simonGraphics.Vector;
-
 import flatlandCharacters.Avatar;
 import flatlandCharacters.Grandson;
 import flatlandCharacters.Man;
+import flatlandCharacters.Msg;
 import flatlandCharacters.Person;
+import flatlandCharacters.RunawayGrandson;
 import flatlandCharacters.Son;
 import flatlandCharacters.Wife;
 
@@ -58,12 +59,18 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 	Grandson grandson = new Grandson("Grandson", new PointD(-200,-300));
 	Wife wife = new Wife("Wife", new PointD(300,300), 100);
 	Man triangle = new Man("Triangle", 3, new PointD(300,-300), 50);
-	Son son = new Son("Son", new PointD(-100,0));
+	Son son = new Son("Son", new PointD(-150,0));
+	RunawayGrandson runaway = new RunawayGrandson("Runaway Grandson", new PointD(1000, 0));
+	
+	PolygonD wall1 = new PolygonD();	
+	PolygonD wall2 = new PolygonD();	
+	PolygonD wall3 = new PolygonD();	
+	PolygonD wall4 = new PolygonD();
 
 	//graphics globals
 	int screenWidth = 0;
 	PointD worldCenter = new PointD(400,400);
-	
+
 	//interactive mode
 	//for adding new points in the interactive mode
 	PolygonD currentShape = new PolygonD();
@@ -86,7 +93,36 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 	 */
 	public void setupWorld()
 	{
+		//build walls
+		wall1.add(new PointD(-500, 500));
+		wall1.add(new PointD(-490, 500));
+		wall1.add(new PointD(-490, -500));
+		wall1.add(new PointD(-500, -500));
+
+		wall2.add(new PointD(-500, 500));
+		wall2.add(new PointD(2000, 500));
+		wall2.add(new PointD(2000, 490));
+		wall2.add(new PointD(-500, 490));
+		
+		wall3.add(new PointD(2000, 500));
+		wall3.add(new PointD(1990, 500));
+		wall3.add(new PointD(1990, -500));
+		wall3.add(new PointD(2000, -500));
+
+		wall4.add(new PointD(-500, -500));
+		wall4.add(new PointD(2000, -500));
+		wall4.add(new PointD(2000, -490));
+		wall4.add(new PointD(-500, -490));
+
+		objects.add(wall1);
+		objects.add(wall2);
+		objects.add(wall3);
+		objects.add(wall4);
+		
+		
+		//add people
 		GameVars.people = people;
+		GameVars.aSquare = aSquare;
 		
 		objects.add(grandson.boundary);
 		people.add(grandson);
@@ -96,9 +132,17 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		
 		objects.add(triangle.boundary);
 		people.add(triangle);
-		
+
 		objects.add(wife.boundary);
 		people.add(wife);
+
+		objects.add(runaway.boundary);
+		people.add(runaway);
+		
+		
+		//set aSquare's position
+		aSquare.rotate(220);
+		
 	}
 	
 	/**
@@ -127,7 +171,7 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		//start the game loop
 		int delay = 16;//16ms = 60fps
 		lastTime = System.nanoTime();
-		while(true)
+		while(GameVars.isRunning)
 		{
 			//update fps once per second
 			//http://stackoverflow.com/a/20769932 for fps counter
@@ -136,7 +180,7 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 				fps = (int)(fpsCounter*1000000000./(System.nanoTime() - lastTime));
 				lastTime = System.nanoTime();
 				fpsCounter = 0;
-				delay = (int)(1000./fps - 1.);
+				//delay = (int)(1000./fps - 1.);
 			}
 			
 			//delay simulation to set fps
@@ -227,8 +271,10 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 						lastI = numVerts - 1;
 					int nextI = (objI + 1) % numVerts;
 					
-					int angle = (int)(new Vector(obj.verts.get(objI), obj.verts.get(lastI))).angleBetween(new Vector(obj.verts.get(objI), obj.verts.get(nextI)));
-					System.out.println("Felt Vertex: " + angle + "deg");
+					int angle = (int)Math.round((new Vector(obj.verts.get(objI), obj.verts.get(lastI))).angleBetween(new Vector(obj.verts.get(objI), obj.verts.get(nextI))));
+					
+					aSquare.sendMsg(new Msg(aSquare, "Felt Vertex: " + angle + "deg"));//null means status message
+					
 					
 					//reverse direction to make aSquare move out of wall
 					Vector offset = new Vector(closestPoint, p);
@@ -295,6 +341,8 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		//System.out.println(drawArea);
 		aSquare.drawFirstPerson(g, drawArea, objectsInScene, worldCenter);
 		
+		if(!GameVars.isRunning)
+			Person.drawString("You Won!!", drawArea.width/2, drawArea.height/2, g);
 		
 		g.setColor(Color.black);
 		graphics.drawString("fps: "+fps,20,30);
@@ -479,8 +527,6 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		//System.out.println(e.getPoint());
-
 		if(showDebug)//for interactive mode, 
 			lastPointOnScreen  = e.getPoint();//for dragging and adding new nodes
 		switch(e.getButton())
@@ -561,7 +607,7 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 		PointD mousePoint = new PointD(lastPointOnScreen); 
 		mousePoint.setX(mousePoint.getX() - worldCenter.getX());
 		mousePoint.setY(mousePoint.getY() - worldCenter.getY());
-		//System.out.println("mpt = "+mousePoint);
+		
 		PolygonD nearestObject = null;
 		Double minDistance = 100.;//threshold for adding points
 		int pointIndex = 0;
@@ -601,7 +647,6 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 
 		if(nearestObject != null)
 		{
-			//drawables.add(new Vector(nearestObject.getVert(pointIndex), nearestObject.getVert((pointIndex+1)% nearestObject.getVerts().size())));
 			nearestObject.getVerts().add(pointIndex, mousePoint);
 			System.out.println(nearestObject);
 		}
@@ -646,7 +691,6 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 	 */
 	private PointD getNearestPointOnLine(Vector v, PointD p)
 	{
-		//System.out.println(v + " "+ p);
 		//for line of form ax + by + c = 0 and point (x0, y0)
 		double a = -1*v.getY();
 		double b = v.getX();
@@ -654,8 +698,6 @@ public class FlatlandGameCreator extends JPanel implements KeyListener, MouseMot
 
 		double x0 = p.getX();
 		double y0 = p.getY();
-		
-		//double d = Math.abs(a*x0 + b*y0 + c)/Math.sqrt(a*a + b*b);
 		
 		//nearest point on line is (x1,y1)
 		double x1 = (b*(b*x0 - a*y0) - a*c )/(a*a + b*b);

@@ -10,11 +10,6 @@ import javax.swing.JPanel;
  * @author Simon Mikulcik
  *
  */
-
-
-//Raytracing http://www.cs.utah.edu/~shirley/books/fcg2/rt.pdf
-//More on Raytracing http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-1-writing-a-simple-raytracer/implementing-the-raytracing-algorithm/
-//Bounding box intersection http://www.scratchapixel.com/lessons/3d-basic-lessons/lesson-7-intersecting-simple-shapes/ray-box-intersection/
 public class FlatlandGameCreatorRunner {
 
 	/**
@@ -32,6 +27,7 @@ public class FlatlandGameCreatorRunner {
 		menu.add(save);
 		newPolygon.addActionListener(game);
 		save.addActionListener(game);
+		//uncomment for menu at top for interactive mode
 		//frame.getContentPane().add(menu,  BorderLayout.NORTH);
 		
 		frame.setSize(800,800);
@@ -42,7 +38,6 @@ public class FlatlandGameCreatorRunner {
 		//uncomment for fullscreen
  		//GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(frame);
 			
-		
 		game.start();
 	}
 

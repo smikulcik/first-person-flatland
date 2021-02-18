@@ -23,14 +23,16 @@ public class Wife extends Woman {
 		if(!GameVars.hasFoundSonYet)
 		{
 			withWhom.sendMsg(new Msg(this, "Thank goodness you are here! One of our grandsons, \n" +
-										"a hexagon, ran away to the council of circles.\n " +
-										"Go find him before he gets himself in \n" + 
-										"trouble?"));
+										"a hexagon, ran away.\n " +
+										"Go find him before he gets himself in trouble!"));
 			GameVars.hasWifeGivenMission = true;
 		}
 		else
+		{
 			withWhom.sendMsg(new Msg(this, "I'm so glad you found him!"));
-			
+			withWhom.sendMsg(new Msg(GameVars.aSquare, "I found him. He is alright."));	
+			GameVars.isRunning = false;
+		}	
 	}
 
 }
