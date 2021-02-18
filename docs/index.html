@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>Flatland Video Game</title>
+
+<style>
+body {
+	background: #27c470; /* Old browsers */
+	background: -moz-linear-gradient(top, #27c470 0%, #4f936c 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#27c470), color-stop(100%,#4f936c)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #27c470 0%,#4f936c 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #27c470 0%,#4f936c 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #27c470 0%,#4f936c 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #27c470 0%,#4f936c 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#27c470', endColorstr='#4f936c',GradientType=0 ); /* IE6-9 */
+	height:1200px;
+	font-family:arial;
+	padding:0px;
+}
+#links {
+	/*position:fixed;*/
+	float:right;
+	width: 200px;
+	height: 300px;
+	background-color: #FFF;
+	padding:10px;
+	border-left: 1px solid black;
+	margin:5px;
+	
+	
+background: rgba(255,255,255,1);
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(60%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 60%, rgba(255,255,255,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
+
+}
+
+#main {
+	margin:auto;
+	width: 800px;
+	background-color: #FFF;
+	padding:50px;
+	
+	border-radius: 15px;
+ }
+ 
+ #screenshot {
+	margin:auto;
+	text-align:center;
+ }
+ #screenshot img {
+	border:5px solid gray;
+	border-radius: 15px;
+ }
+ 
+ #copyright {
+	font-size:15px;
+	font-family: Sans;
+	padding:30px;
+	margin:auto;
+	text-align:center; 
+	color:white;
+ }
+</style>
+
+</head>
+
+<body>
+<div id='main'>
+	<div id='links'>
+		<h3>Links:</h3>
+		<a href='/'>
+		Home
+		</a>
+		<br>
+		<br>
+		<a href='http://sourceforge.net/projects/firstpersonflatlandgame/files/FlatlandGame_1.0.jar/download'>
+			Executable
+		</a> Java .jar
+		<br>
+		<br>
+		<a href='http://sourceforge.net/projects/firstpersonflatlandgame/files/FPFlatlandGame_src_1.0.zip/download'>
+		Source
+		</a> Eclipse Project
+		<br>
+		<br>
+		<a href='https://sourceforge.net/projects/firstpersonflatlandgame/'>
+		Project Page
+		</a> Sourceforge
+		<br>
+		<br>
+		<a href='analysis.html'>
+		Project Analysis with Flatland
+		</a>
+	</div>
+	
+	
+	<h1>First Person Perspective Flatland Game</h1>
+	<span>Simon Mikulcik</span>
+	<hr>
+	
+	<p>
+	Edwin A. Abbott wrote Flatland in 1884.  He designed a 2D world in which polygons live and interact.  He described the society of these 'Flatlanders,' and emphasized how important shape recognition is to the class system in Flatland: the more sides a polygon has, the higher class he has.  This game recreates the world of Flatland and places the player as A Square in Flatland.  This game also set in a first person perspective from a Flatlander: you see a one dimensional image.
+	</p>
+	
+	<p>
+	Ok, so here is an overview of the game:
+	<ul>
+		<li>First Person Perspective (I built a simple raytracer to render the view)</li>
+		<li>Character: A Square</li>
+		<li>Plot: A Square's Grandson ran away and you have to find him.</li>
+		<li>Programmed 100% in Java.</li>
+		<li>Controls:
+			<ul>
+			<li>Move mouse to look left and right</li>
+			<li>WASD/Arrow Keys to move</li>
+			</ul>
+		</li>
+	</ul>
+	</p>
+	
+	<div  id='screenshot' >
+		<img src='images/screenshot.png' width=400/><br>
+		Screenshot from Game
+	</div>
+	
+	<p>	
+	This is a project for my Honors class, Stories and Structures, at Eastern Kentucky University.
+	</p>
+	
+	
+</div>
+	<div id='copyright'>
+	Copyright 2014 Simon Mikulcik
+	</div>
+</body>
+
+</html>
